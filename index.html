@@ -1,0 +1,449 @@
+<!doctype html>
+
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>أمنية | مساحة للأحلام</title><style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap');
+
+:root{
+--ink:#f8fbff;--muted:#a9b7ce;--cyan:#7ee7ff;
+--violet:#bda1ff;--pink:#ff9ecf;--line:#ffffff20;
+--shadow:0 30px 90px #02061799
+}
+*{box-sizing:border-box}
+html{min-height:100%;background:#050817}
+body{
+min-height:100vh;margin:0;color:var(--ink);
+font-family:"Cairo","Segoe UI",Tahoma,sans-serif;
+overflow-x:hidden;
+background:
+radial-gradient(circle at 50% -10%,#293a78 0,transparent 38%),
+radial-gradient(circle at 88% 80%,#7b3d8550 0,transparent 28%),#050817
+}
+body:before,body:after{
+content:"";position:fixed;inset:0;pointer-events:none;z-index:-1
+}
+body:before{
+opacity:.45;
+background-image:radial-gradient(circle,#fff 0 1px,transparent 1.5px);
+background-size:93px 93px;
+mask-image:linear-gradient(180deg,#000,transparent 85%)
+}
+body:after{
+opacity:.22;
+background-image:
+radial-gradient(circle at 20% 28%,#fff 0 1px,transparent 1px),
+radial-gradient(circle at 76% 19%,#fff 0 1px,transparent 1px);
+background-size:137px 121px,181px 163px;
+animation:drift 18s linear infinite
+}
+.page{
+width:min(1120px,100%);min-height:100vh;margin:auto;
+padding:28px 24px 42px;display:flex;flex-direction:column
+}
+.topbar{
+display:flex;align-items:center;justify-content:space-between;
+gap:20px
+}
+.logo{
+display:flex;align-items:center;gap:11px;
+font-size:17px;font-weight:800;letter-spacing:1px
+}
+.logo-mark{
+width:35px;height:35px;display:grid;place-items:center;
+border:1px solid var(--cyan);border-radius:50%;
+color:var(--cyan);box-shadow:0 0 25px #7ee7ff66
+}
+.status{
+display:flex;align-items:center;gap:8px;
+color:var(--muted);font-size:12px
+}
+.status i{
+width:7px;height:7px;border-radius:50%;
+background:#7dffb2;box-shadow:0 0 14px #7dffb2
+}
+main{
+flex:1;display:grid;place-items:center;
+padding:70px 0 50px
+}
+.wish-stage{
+width:min(760px,100%);text-align:center
+}
+.orbit{
+width:112px;height:112px;margin:0 auto 28px;
+border:1px solid #7ee7ff66;border-radius:50%;
+display:grid;place-items:center;
+box-shadow:0 0 0 14px #7ee7ff0c,0 0 55px #7ee7ff44;
+animation:float 4s ease-in-out infinite
+}
+.orbit:before,.orbit:after{
+content:"";position:absolute;border:1px solid #bda1ff66;
+border-radius:50%;transform:rotate(42deg)
+}
+.orbit:before{inset:-18px 13px}
+.orbit:after{inset:13px -18px;transform:rotate(-42deg)}
+.orbit span{
+font-size:38px;color:var(--cyan);
+text-shadow:0 0 22px #7ee7ff
+}
+.eyebrow{
+margin:0 0 15px;color:var(--cyan);
+font:600 11px "Segoe UI",sans-serif;letter-spacing:3px
+}
+h1{
+font-size:clamp(36px,7vw,76px);line-height:1.15;
+margin:0 0 18px;font-weight:800;
+background:linear-gradient(110deg,#fff,var(--cyan) 45%,var(--pink));
+-webkit-background-clip:text;background-clip:text;color:transparent
+}
+.intro{
+max-width:555px;margin:0 auto 30px;color:var(--muted);
+font-size:16px;line-height:2
+}
+.wish-card{
+text-align:right;padding:25px;border:1px solid var(--line);
+border-radius:25px;
+background:linear-gradient(145deg,#142148b8,#0b1127c9);
+box-shadow:var(--shadow),inset 0 1px #ffffff12;
+backdrop-filter:blur(20px)
+}
+.field-head{
+display:flex;align-items:center;justify-content:space-between;
+gap:12px;margin-bottom:12px
+}
+.field-head label{font-size:14px;font-weight:700}
+.counter{font-size:11px;color:var(--muted)}
+textarea{
+width:100%;min-height:148px;resize:vertical;
+border:1px solid #ffffff1d;border-radius:16px;
+background:#060b1dcc;color:var(--ink);padding:16px;
+font:500 15px/2 "Cairo","Segoe UI",sans-serif;outline:none
+}
+textarea:focus{
+border-color:#7ee7ff99;
+box-shadow:0 0 0 4px #7ee7ff12
+}
+.card-footer{
+display:flex;align-items:center;justify-content:space-between;
+gap:16px;margin-top:18px
+}
+.privacy{color:#7e8ba4;font-size:11px}
+.submit{
+border:0;border-radius:12px;padding:13px 20px;
+color:#07111d;background:linear-gradient(110deg,var(--cyan),#b9f5ff);
+font:800 14px "Cairo",sans-serif;cursor:pointer
+}
+.submit:disabled{opacity:.5;cursor:not-allowed}
+.hint-row{
+display:flex;justify-content:center;gap:9px;
+flex-wrap:wrap;margin-top:20px
+}
+.hint{
+border:1px solid #ffffff16;border-radius:999px;
+padding:7px 12px;color:#8e9bb5;font-size:11px;
+background:#ffffff06
+}
+.result{display:none;text-align:center}
+.result.show{display:block}
+.result h2{
+font-size:clamp(27px,5vw,48px);margin:0 0 14px
+}
+.wish-quote{
+max-width:620px;margin:0 auto 24px;padding:20px 24px;
+border-right:2px solid var(--cyan);
+border-left:2px solid var(--violet);
+border-radius:15px;background:#ffffff08;
+font-size:18px;line-height:2;word-break:break-word
+}
+.result-message{
+color:var(--muted);line-height:2;font-size:15px;
+margin:0 auto 27px
+}
+.again{
+border:1px solid #7ee7ff77;border-radius:12px;
+padding:11px 18px;background:#7ee7ff0d;
+color:var(--cyan);font:700 13px "Cairo",sans-serif;
+cursor:pointer
+}
+.reply-box{
+display:none;max-width:620px;margin:0 auto 26px;
+padding:18px 22px;border:1px solid #7dffb255;
+border-radius:16px;background:#7dffb20b;text-align:right
+}
+.reply-box.show{display:block}
+.reply-box span{
+display:block;color:#7dffb2;font-size:11px;margin-bottom:7px
+}
+.reply-box div{
+color:#edfff4;font-size:15px;line-height:2
+}
+footer{
+display:flex;justify-content:space-between;gap:20px;
+color:#6f7d98;font-size:11px;
+border-top:1px solid #ffffff12;padding-top:18px
+}
+@keyframes float{
+0%,100%{transform:translateY(0) rotate(0)}
+50%{transform:translateY(-8px) rotate(3deg)}
+}
+@keyframes drift{
+from{transform:translate(0,0)}
+to{transform:translate(-35px,20px)}
+}
+@media(max-width:600px){
+.page{padding:20px 16px 28px}
+main{padding:55px 0 40px}
+.wish-card{padding:18px}
+.card-footer{align-items:stretch;flex-direction:column}
+.submit{width:100%}
+.privacy{text-align:center}
+.intro{font-size:14px}
+footer{flex-direction:column;text-align:center;gap:7px}
+}
+</style></head><body><div class="page"><header class="topbar">
+<div class="logo">
+<span class="logo-mark">✦</span>
+<span>أمنية</span>
+</div><div class="status">
+<i></i>
+<span>مساحتك الخاصة متصلة</span>
+</div>
+</header><main><section class="wish-stage"><div id="wishForm"><div class="orbit"><span>✦</span></div><p class="eyebrow">مساحة رقمية للأمنيات</p><h1>اكتب الأمنية<br>التي تسكنك</h1><p class="intro">
+هنا لا تحتاج أمنيتك إلى تفسير. اكتبها كما تشعر بها، واترك لها مكانًا بين النجوم.
+</p><form class="wish-card" id="wishFormElement"><div class="field-head">
+<label for="wishInput">أمنيتك</label>
+<span class="counter" id="counter">0 / 280</span>
+</div><textarea id="wishInput"
+maxlength="280"
+placeholder="أتمنى أن..."></textarea><div class="card-footer"><span class="privacy">
+أمنيتك تصل إلى مساحة استقبال الأمنيات
+</span><button class="submit" type="submit">
+إطلاق الأمنية ✦
+</button></div></form><div class="hint-row">
+<span class="hint">اكتب بصدق</span>
+<span class="hint">خذ نفسًا عميقًا</span>
+<span class="hint">اترك الباقي للوقت</span>
+</div></div><div class="result" id="result"><div class="orbit"><span>✦</span></div><p class="eyebrow">تم حفظ إشارتك</p><h2>أمنيتك وصلت</h2><div class="wish-quote" id="wishQuote"></div><p class="result-message">
+احتفظ بها قريبة من قلبك. هذه بداية صغيرة لشيء سنصممه معًا، خطوة بعد خطوة، حتى يصبح لهذا الحلم مكان حقيقي في العالم.
+</p><div class="reply-box" id="wishReply"><span>رد من مساحة الأمنيات</span>
+
+<div id="wishReplyText"></div></div><button class="again" type="button" id="again">
+كتابة أمنية أخرى
+</button></div></section></main><footer>
+<span>© مساحة أمنية</span>
+<span>
+إشارة هادئة من المستقبل ·
+<span id="wishCount">0</span> أمنية
+</span>
+</footer></div><script>
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbwJLdoui2pmzH-GqtsDZT6ZNJKwkfSSj65rrjHkwfxl-AvhJFNWh-uI7cNBpG8qA5s/exec";
+
+
+const input = document.getElementById("wishInput");
+const counter = document.getElementById("counter");
+const form = document.getElementById("wishFormElement");
+const formView = document.getElementById("wishForm");
+const result = document.getElementById("result");
+const quote = document.getElementById("wishQuote");
+const again = document.getElementById("again");
+const replyBox = document.getElementById("wishReply");
+const replyText = document.getElementById("wishReplyText");
+const countLabel = document.getElementById("wishCount");
+const submitButton = document.querySelector(".submit");
+
+let activeWishId =
+localStorage.getItem("my-wish-id") || null;
+
+let wishes =
+Number(localStorage.getItem("wish-count") || 0);
+
+
+/* العداد */
+
+function updateCount(){
+counter.textContent = `${input.value.length} / 280`;
+}
+
+
+/* عدد الأمنيات على هذا الجهاز */
+
+function updateWishes(){
+countLabel.textContent = wishes;
+}
+
+
+/* إرسال بيانات إلى Apps Script */
+
+async function apiPost(data){
+
+const response = await fetch(API_URL,{
+method:"POST",
+headers:{
+"Content-Type":"text/plain;charset=utf-8"
+},
+body:JSON.stringify(data)
+});
+
+if(!response.ok){
+throw new Error("تعذر الاتصال بالخادم");
+}
+
+return await response.json();
+
+}
+
+
+/* إرسال الأمنية */
+
+async function publishWish(text){
+
+const data = await apiPost({
+action:"addWish",
+text:text
+});
+
+if(!data.success){
+throw new Error(data.error || "تعذر إرسال الأمنية");
+}
+
+activeWishId = data.id;
+
+localStorage.setItem(
+"my-wish-id",
+activeWishId
+);
+
+return data;
+}
+
+
+/* جلب الرد */
+
+async function checkReply(){
+
+if(!activeWishId) return;
+
+try{
+
+const response = await fetch(
+API_URL +
+"?action=getWish&id=" +
+encodeURIComponent(activeWishId) +
+"&t=" + Date.now()
+);
+
+const data = await response.json();
+
+if(
+data.success &&
+data.wish &&
+data.wish.reply
+){
+
+replyText.textContent =
+data.wish.reply;
+
+replyBox.classList.add("show");
+
+}
+
+}catch(error){
+
+console.log("انتظار الرد...",error);
+
+}
+
+}
+
+
+/* إرسال الأمنية */
+
+form.addEventListener("submit",async function(event){
+
+event.preventDefault();
+
+const wish = input.value.trim();
+
+if(!wish){
+input.focus();
+return;
+}
+
+submitButton.disabled = true;
+submitButton.textContent = "جاري الإرسال...";
+
+try{
+
+await publishWish(wish);
+
+quote.textContent = "“ " + wish + " ”";
+
+replyBox.classList.remove("show");
+replyText.textContent = "";
+
+formView.style.display = "none";
+result.classList.add("show");
+
+wishes++;
+
+localStorage.setItem(
+"wish-count",
+String(wishes)
+);
+
+updateWishes();
+
+input.value = "";
+updateCount();
+
+}catch(error){
+
+alert(
+"تعذر إرسال الأمنية.\n\n" +
+error.message
+);
+
+console.error(error);
+
+}finally{
+
+submitButton.disabled = false;
+submitButton.textContent = "إطلاق الأمنية ✦";
+
+}
+
+});
+
+
+/* أمنية أخرى */
+
+again.addEventListener("click",function(){
+
+input.value = "";
+updateCount();
+
+replyBox.classList.remove("show");
+replyText.textContent = "";
+
+result.classList.remove("show");
+formView.style.display = "block";
+
+input.focus();
+
+});
+
+
+/* فحص الرد كل 5 ثوان */
+
+setInterval(checkReply,5000);
+
+updateCount();
+updateWishes();
+checkReply();
+
+</script></body>
+</html>
